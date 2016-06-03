@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 set(LIB_NAME nabo)
 project("${LIB_NAME}" VERSION 1.0.6)
 
-set(D4D_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../D4DWand") 
+set(D4D_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../D4DWand") 
 include("${D4D_ROOT}/1stParty/Cmake/D4DCommonConfig.cmake")
 include(D4DCreateProjectConfig)
 
