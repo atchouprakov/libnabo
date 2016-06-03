@@ -411,6 +411,13 @@ namespace Nabo
 			return 0;
 	}
 	
+    template struct OpenCLSearch<float>;
+    template struct OpenCLSearch<double>;
+    template struct OpenCLSearch<float, Eigen::Matrix3Xf>;
+    template struct OpenCLSearch<double, Eigen::Matrix3Xd>;
+    template struct OpenCLSearch<float, Eigen::Map<const Eigen::Matrix3Xf, Eigen::Aligned> >;
+    template struct OpenCLSearch<double, Eigen::Map<const Eigen::Matrix3Xd, Eigen::Aligned> >;
+
 	template<typename T, typename CloudType>
 	BruteForceSearchOpenCL<T, CloudType>::BruteForceSearchOpenCL(const CloudType& cloud, const Index dim, const unsigned creationOptionFlags, const cl_device_type deviceType):
 	OpenCLSearch<T, CloudType>::OpenCLSearch(cloud, dim, creationOptionFlags, deviceType)

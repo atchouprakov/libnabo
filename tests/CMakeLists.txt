@@ -51,10 +51,6 @@ else (FLANN_INCLUDE_DIR AND FLANN_LIBRARY)
 	message("FLANN not found, disabling it in benchmarks")
 endif (FLANN_INCLUDE_DIR AND FLANN_LIBRARY)
 
-check_symbol_exists(_POSIX_TIMERS "unistd.h;time.h" POSIX_TIMERS)
-if (POSIX_TIMERS AND NOT APPLE)
-	set(EXTRA_LIBS ${EXTRA_LIBS} rt)
-endif (POSIX_TIMERS AND NOT APPLE)
 
 include_directories(..)
 
@@ -86,7 +82,7 @@ macro(try_compile_cloud_types MAT_TYPE TREE_TYPE EXPECT)
   try_compile(COMPILE_SUCCEEDED
                 "${CMAKE_CURRENT_BINARY_DIR}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/invalid_matrix_types.cpp"
-                COMPILE_DEFINITIONS "-D${MAT_TYPE} -D${TREE_TYPE} -I${CMAKE_CURRENT_SOURCE_DIR}/../ -I${EIGEN_INCLUDE_DIR} -l${LIB_NAME}"
+                COMPILE_DEFINITIONS "-D${MAT_TYPE} -D${TREE_TYPE} -I${CMAKE_CURRENT_SOURCE_DIR}/../ -I${EIGEN_INCLUDE_DIRS} -l${LIB_NAME}"
                 CMAKE_FLAGS "-DCMAKE_CXX_LINK_EXECUTABLE='echo not linking now...'"
                 OUTPUT_VARIABLE OUTPUT)
 
@@ -102,10 +98,10 @@ macro(try_compile_cloud_types MAT_TYPE TREE_TYPE EXPECT)
 
 endmacro(try_compile_cloud_types)
 
-try_compile_cloud_types(NABO_EIGEN_DYNAMIC_TYPE, NABO_TYPE_CREATE, TRUE)
-try_compile_cloud_types(NABO_EIGEN_DYNAMIC_TYPE, NABO_TYPE_BRUTE_FORCE, TRUE)
-try_compile_cloud_types(NABO_EIGEN_DYNAMIC_TYPE, NABO_TYPE_LINEAR_HEAP, TRUE)
-try_compile_cloud_types(NABO_EIGEN_DYNAMIC_TYPE, NABO_TYPE_TREE_HEAP, TRUE)
+#try_compile_cloud_types(NABO_EIGEN_DYNAMIC_TYPE, NABO_TYPE_CREATE, TRUE)
+#try_compile_cloud_types(NABO_EIGEN_DYNAMIC_TYPE, NABO_TYPE_BRUTE_FORCE, TRUE)
+#try_compile_cloud_types(NABO_EIGEN_DYNAMIC_TYPE, NABO_TYPE_LINEAR_HEAP, TRUE)
+#try_compile_cloud_types(NABO_EIGEN_DYNAMIC_TYPE, NABO_TYPE_TREE_HEAP, TRUE)
 
 try_compile_cloud_types(NABO_EIGEN_SEMI_DYNAMIC_TYPE, NABO_TYPE_CREATE, FALSE)
 try_compile_cloud_types(NABO_EIGEN_SEMI_DYNAMIC_TYPE, NABO_TYPE_BRUTE_FORCE, FALSE)

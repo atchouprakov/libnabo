@@ -20,53 +20,9 @@ execute_process(
 )
 
 
-if (NOT CMAKE_BUILD_TYPE)
-  message("-- No build type specified; defaulting to CMAKE_BUILD_TYPE=Release.")
-  set(CMAKE_BUILD_TYPE Release CACHE STRING
-    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
-    FORCE)
-else (NOT CMAKE_BUILD_TYPE)
-  if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message("\n=================================================================================")
-    message("\n-- Build type: Debug. Performance will be terrible!")
-    message("-- Add -DCMAKE_BUILD_TYPE=Release to the CMake command line to get an optimized build.")
-    message("\n=================================================================================")
-  endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
-endif (NOT CMAKE_BUILD_TYPE)
-
-if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
-  add_definitions(-O3)
-endif(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 # Documentation
 # Switch on warnings.
-#add_definitions(-Wall -Wextra)
-
-
-# Boost required for any and cstdint on MSVC < 2010
-#set(Boost_USE_STATIC_LIBS        ON) 
-# #set(BOOST_ROOT "C:/source/2015 sapphire_ws/D4DWand/3rdParty/win/boost_1_59_0" )
-# set(Boost_NO_SYSTEM_PATHS TRUE)
-
-# find_package(Boost COMPONENTS REQUIRED)
-# if(MSVC AND (MSVC_VERSION LESS 1600))
-	# add_definitions(-DBOOST_STDINT)
-# endif(MSVC AND (MSVC_VERSION LESS 1600))
-
-# openmp
-# find_package(OpenMP)
-# if (OPENMP_FOUND)
-  # add_definitions(-fopenmp -DHAVE_OPENMP)
-  # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-  # if (CMAKE_COMPILER_IS_GNUCC)
-    # set(EXTRA_LIBS ${EXTRA_LIBS} gomp)
-  # endif(CMAKE_COMPILER_IS_GNUCC)
-# endif(OPENMP_FOUND)
-
-# eigen 2 or 3
-
-# find_path (EIGEN_INCLUDE_DIRS NAMES "signature_of_eigen3_matrix_library" PATHS C:/lib/Eigen/include/eigen3)
-
 
 
 # main nabo lib
